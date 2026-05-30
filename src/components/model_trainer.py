@@ -20,11 +20,11 @@ from src.utils import save_object,evaluate_models
 
 @dataclass
 class ModelTrainerConfig:
-    train_model_file_path=os.path.join('artifact','model.pkl')
+    train_model_file_path=os.path.join('artifacts','model.pkl')
 
 class ModelTrainer:
     def __init__(self):
-        self.model_trainer_config=ModelTrainerConfig #this variable will get the path in ModelTrainerConfig class 
+        self.model_trainer_config=ModelTrainerConfig() #this variable will get the path in ModelTrainerConfig class 
 
     def initiate_model_trainer(self,train_array,test_array):
         try:
