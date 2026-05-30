@@ -7,9 +7,9 @@ from src.exception import CustomException
 from sklearn.metrics import r2_score
 
 def save_object(file_path, obj):
+    ''' takes a Python object (like your trained model or preprocessor) and dumps it into a .pkl file using dill'''
     try:
         dir_path = os.path.dirname(file_path)
-
         os.makedirs(dir_path, exist_ok=True)
 
         with open(file_path, "wb") as file_obj:
@@ -36,6 +36,15 @@ def evaluate_models(X_train, y_train, X_test, y_test, models):
             report[list(models.keys())[i]] = test_model_score
 
         return report
+
+    except Exception as e:
+        raise CustomException(e, sys)
+    
+def load_object(file_path):
+    '''opens .pkl file and loads it back into memory as a Python object'''
+    try:
+        with open(file_path, "rb") as file_obj:
+            return dill.load(file_obj)
 
     except Exception as e:
         raise CustomException(e, sys)
